@@ -9,3 +9,8 @@ const ciphertext =
   AESencrypto.final("base64");
 
 console.log(ciphertext);
+
+const AESdecrypto = crypto.createDecipheriv("aes-256-cbc", key, iv);
+const plaintext =
+  AESdecrypto.update(ciphertext, "base64", "utf8") + AESdecrypto.final("utf8");
+console.log("Plaintext : " + plaintext);
