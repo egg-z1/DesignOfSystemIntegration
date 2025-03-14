@@ -1,6 +1,7 @@
 import crypto from "crypto";
 
 // 🔑 RSA 공개키 및 비밀키 생성 (2048비트 키 사용)
+// publicKey : RSApk 이런식으로 별명을 부여해줄 수 있다.
 const { publicKey, privateKey } = crypto.generateKeyPairSync("rsa", {
   modulusLength: 2048, // 키 길이 설정 (보안성 강화를 위해 2048비트 사용)
 });
