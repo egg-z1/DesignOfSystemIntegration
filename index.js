@@ -32,9 +32,18 @@ const rsaCiphertext = crypto.publicEncrypt(
   },
   Buffer.from("Hello world!") // 암호화할 메시지 (Buffer 형태로 변환)
 );
+console.log("Cipher text: " + rsaCiphertext.toString("base64")); // 🖨 암호화된 데이터 (Base64 인코딩)
 
-// 🖨 암호화된 데이터 (Base64 인코딩)
-console.log("Cipher text: " + rsaCiphertext.toString("base64"));
+// 🔓 RSA 비밀키 복호화
+const rsaPlaintext = crypto.privateDecrypt(
+  {
+    key: privateKey,
+    padding: crypto.constants.RSA_PKCS1_OAEP_PADDING,
+    oaepHash: "sha256",
+  },
+  rsaCiphertext
+);
+console.log("Plain text : " + rsaPlaintext); // 🖨 복호화된 데이터
 
 // 🛑 주석 처리된 AES-256-CBC 암호화 및 복호화 코드
 // 🔑 대칭키 및 IV 설정
@@ -47,8 +56,7 @@ console.log("Cipher text: " + rsaCiphertext.toString("base64"));
 //   AESencrypto.update("Hello world!", "utf8", "base64") + // 문자열을 base64로 변환하며 암호화
 //   AESencrypto.final("base64");
 
-// 🖨 AES 암호화된 데이터
-// console.log(ciphertext);
+// console.log(ciphertext); // 🖨 AES 암호화된 데이터
 
 // 🔓 AES-256-CBC 복호화
 // const AESdecrypto = crypto.createDecipheriv("aes-256-cbc", key, iv);
@@ -56,5 +64,4 @@ console.log("Cipher text: " + rsaCiphertext.toString("base64"));
 //   AESdecrypto.update(ciphertext, "base64", "utf8") + // base64를 utf8 문자열로 변환하며 복호화
 //   AESdecrypto.final("utf8");
 
-// 🖨 복호화된 원본 데이터 출력
-// console.log("Plaintext : " + plaintext);
+// console.log("Plaintext : " + plaintext); // 🖨 복호화된 원본 데이터 출력
